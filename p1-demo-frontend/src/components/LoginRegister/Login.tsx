@@ -39,7 +39,7 @@ export const Login: React.FC = () => {
 
         //use the username/password in state to send a POST to the java server
         //NOTE: with credentials is what lets us send/save user session info
-        const response = await axios.post("http://localhost:8080/auth", user, {withCredentials:true})
+        const response = await axios.post("http://3.86.183.171:8080/auth", user, {withCredentials:true})
         .then(
             (response) => {
 
