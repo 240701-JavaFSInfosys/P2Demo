@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component //make this class a Bean
 public class Car {
 
+    //testing testing
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int carId;
