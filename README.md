@@ -4,8 +4,7 @@
 
 - JWT and Spring Security for auth, security, and password encryption on the backend
   - Login and Register require no auth. Login creates and sends a JWT in the response
-  - All other requests require a JWT in the Authorization Header of all requests
-  - Only add pokemon get all pokemon works appropriately with JWTs for now
+    - All other requests require a JWT in the Authorization Header of all requests
   - Check the Utils package and application.properties for the JWT and Spring Security configuration
     
 - Context API for global storage on the front end
