@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController //makes the class bean, turns all HTTP Response data into JSON
 @RequestMapping("/cars") //all HTTP Requests ending in /cars will come to this Controller
@@ -59,7 +60,7 @@ public class CarController {
 
     //This method will delete a Car by its ID
     @DeleteMapping("/{carId}")
-    public ResponseEntity<Object> deleteCarById(@PathVariable int carId){
+    public ResponseEntity<Object> deleteCarById(@PathVariable UUID carId){
 
         //TODO: probably wrapped in a try/catch assuming the service throws exceptions
 
@@ -73,7 +74,7 @@ public class CarController {
 
     //This method will return all Cars associates with a User ID
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Car>> getCarsByUserId(@PathVariable int userId){
+    public ResponseEntity<List<Car>> getCarsByUserId(@PathVariable UUID userId){
 
         return ResponseEntity.ok(cs.getCarsByUserId(userId));
 

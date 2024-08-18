@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController //Makes this class a bean and turns HTTP Response data into JSON (@Controller, @ResponseBody)
 @RequestMapping("/users") //All HTTP Requests ending in /users will go to this controller
@@ -57,7 +58,7 @@ public class UserController {
 
     //A Method that updates a User's username
     @PatchMapping("/{userId}")
-    public ResponseEntity<Object> updateUsername(@RequestBody String username, @PathVariable int userId){
+    public ResponseEntity<?> updateUsername(@RequestBody String username, @PathVariable UUID userId){
 
         //using our rudimentary error handling thanks to Optional in the Service
 

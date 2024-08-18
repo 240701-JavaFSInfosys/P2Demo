@@ -4,15 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "cars")
 @Component //make this class a Bean
 public class Car {
 
-    //testing testing testing
+    //Using UUIDs instead of int now!
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int carId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID carId;
 
     //We could have constraints in the following columns (make, model, 4wD), but I left them out
 
@@ -42,7 +44,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(int carId, String make, String model, boolean isFourWheelDrive, User user) {
+    public Car(UUID carId, String make, String model, boolean isFourWheelDrive, User user) {
         this.carId = carId;
         this.make = make;
         this.model = model;
@@ -50,11 +52,11 @@ public class Car {
         this.user = user;
     }
 
-    public int getCarId() {
+    public UUID getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(UUID carId) {
         this.carId = carId;
     }
 

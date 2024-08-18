@@ -1,5 +1,7 @@
 package com.revature.models.DTOs;
 
+import java.util.UUID;
+
 //Remember what a DTO is? Data Transfer Object
 //This Class will be used to model incoming Car data (int for User instead of a User object, no carId)
 public class IncomingCarDTO {
@@ -7,14 +9,14 @@ public class IncomingCarDTO {
     private String make;
     private String model;
     private boolean isFourWheelDrive;
-    private int userId;
+    private UUID userId;
 
     //boilerplate-----------
 
     public IncomingCarDTO() {
     }
 
-    public IncomingCarDTO(String make, String model, boolean isFourWheelDrive, int userId) {
+    public IncomingCarDTO(String make, String model, boolean isFourWheelDrive, UUID userId) {
         this.make = make;
         this.model = model;
         this.isFourWheelDrive = isFourWheelDrive;
@@ -45,11 +47,11 @@ public class IncomingCarDTO {
         isFourWheelDrive = fourWheelDrive;
     }
 
-    public int getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

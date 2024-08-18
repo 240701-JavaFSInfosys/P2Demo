@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service //1 of the 4 stereotype annotations. Makes this Class a Bean
 public class UserService {
@@ -50,7 +51,7 @@ public class UserService {
     }
 
     //This method lets us update a user's username
-    public User updateUser(String newUsername, int userId){
+    public User updateUser(String newUsername, UUID userId){
 
         //TODO: error handling, check for valid inputs
 

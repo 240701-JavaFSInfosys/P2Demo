@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CarService {
@@ -32,7 +33,7 @@ public class CarService {
 
         //We do need to build a Car object to send to the service... so we'll do that conversion
         //0 for id since it gets generated, null for User and we'll add it next
-        Car car = new Car(0, newCar.getMake(), newCar.getModel(), newCar.isFourWheelDrive(), null);
+        Car car = new Car(null, newCar.getMake(), newCar.getModel(), newCar.isFourWheelDrive(), null);
 
         //use the DTO's userId field to get a User by its ID.
         Optional<User> u = uDAO.findById(newCar.getUserId());
@@ -61,7 +62,7 @@ public class CarService {
     }
 
     //This method will take in a Car ID and delete it through the DAO
-    public void deleteCarById(int id){
+    public void deleteCarById(UUID id){
 
         //First we need to get the Car by its id, for error handling AND for deletion
         //The car WILL NOT fully delete unless it's also deleted from the User's List<Car>
@@ -77,7 +78,7 @@ public class CarService {
     }
 
     //This method will take in an int and find Cars with that user ID from the DAO
-    public List<Car> getCarsByUserId(int userId){
+    public List<Car> getCarsByUserId(UUID userId){
 
         //TODO: error handling, check for valid id, maybe check for empty return
 
