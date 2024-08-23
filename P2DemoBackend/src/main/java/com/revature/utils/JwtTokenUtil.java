@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.UUID;
 
-//This Util Class is what generates and manages our JWTs
+//This Util Class is what generates, manages, and validates our JWTs
 //JWT (JSON Web Token) is a modern way to store a user's information and confirm their identity
 //We will set up our app so that the user cannot do anything besides login/register
 //...until they have a valid JWT in their HTTP request headers
@@ -60,7 +60,6 @@ public class JwtTokenUtil {
     }
 
     //The below 3 methods are like getters for your JWT - they'll extract info out of them
-
 
     //we need this method to get the userID from the JWT (stored in the subject)
     //the subject tends to be used for unique identifiers
