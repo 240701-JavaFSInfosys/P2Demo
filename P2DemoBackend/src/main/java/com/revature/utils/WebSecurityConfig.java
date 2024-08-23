@@ -79,6 +79,7 @@ public class WebSecurityConfig {
         return http.csrf(c -> c.disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(req -> req.getMethod().equals("POST") && req.getServletPath().equals("/users")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
