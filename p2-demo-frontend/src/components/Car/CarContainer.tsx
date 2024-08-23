@@ -28,7 +28,11 @@ export const CarContainer: React.FC = () => {
 
         //our GET request 
         //TODO: send withCredentials to confirm the user is logged in)
-        const response = await axios.get("http://localhost:8080/cars/" + store.loggedInUser.userId)
+        const response = await axios.get("http://44.208.20.19:8080/cars/" + store.loggedInUser.userId, {
+            headers: {
+                'Authorization': `Bearer ${store.loggedInUser.jwt}`
+            }
+        })
 
         //populate the car state
         setCars(response.data)

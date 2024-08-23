@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
+import { store } from "../../globalData/store"
 
 export const UsersContainer: React.FC<any> = ({users:any}) => {
 
@@ -20,7 +21,11 @@ export const UsersContainer: React.FC<any> = ({users:any}) => {
     //function to get all users from the DB
     const getAllUsers = async () => {
 
-        const response = await axios.get("http://localhost:8080/users")
+        const response = await axios.get("http://44.208.20.19:8080/users", {
+            headers: {
+                'Authorization': `Bearer ${store.loggedInUser.jwt}`
+            }
+        })
         .then(
             (response) => {
                 console.log(response.data)

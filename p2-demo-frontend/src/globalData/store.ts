@@ -12,7 +12,8 @@ export const store:any = {
     loggedInUser: {
         userId:0,
         username:"",
-        role:""
+        role:"",
+        jwt:"" //NEED THIS FOR REQUESTS THAT NEED JWT VALIDATION
     } as UserInterface, 
     //NOTE: we could have made a UserInterface (and I might still)
 
