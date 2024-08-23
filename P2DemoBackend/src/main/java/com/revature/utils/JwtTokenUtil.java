@@ -10,7 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.UUID;
 
-//This Util Class is what generates and manages our JWTs and
+//This Util Class is what generates and manages our JWTs
+//JWT (JSON Web Token) is a modern way to store a user's information and confirm their identity
+//We will set up our app so that the user cannot do anything besides login/register
+//...until they have a valid JWT in their HTTP request headers
 @Component
 public class JwtTokenUtil {
     private static final long EXPIRE_DURATION = 24 * 60 * 60 * 1000; // 24 hour life for our JWT
