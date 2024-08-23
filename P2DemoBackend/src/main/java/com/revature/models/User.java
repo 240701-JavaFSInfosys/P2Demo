@@ -2,15 +2,20 @@ package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Entity //This makes a Class a DB table in your Database. (Makes a DB ENTITY)
 @Table(name = "users") //This lets us set attributes like the name of the table
 @Component //make this class a Bean
-public class User {
+//SPRING SECURITY - This class implements UserDetails to integrate nicely into Spring Security
+//now we'll be able to use the User class in our Spring Sec functionalities
+public class User implements UserDetails {
 
     @Id //This makes the field the Primary Key
     @GeneratedValue(strategy = GenerationType.UUID) //This makes our PK auto-increment
@@ -71,6 +76,33 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    //Spring Security - implemented methods from UserDetails
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+    //------------------------------------------------------
 
     public String getPassword() {
         return password;
