@@ -6,6 +6,7 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +19,14 @@ public class UserController {
 
     private UserService us;
 
+    //Adding a Password Encoder so that new registered users have hashed passwords
+    private PasswordEncoder passwordEncoder; //THANKS SPRING SECURITY!
+
     //UserController depends on UserService (it needs its methods). So let's constructor inject the Service
     @Autowired
-    public UserController(UserService us) {
+    public UserController(UserService us, PasswordEncoder passwordEncoder) {
         this.us = us;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //A method that inserts a new User into the DB
@@ -29,6 +34,9 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User newUser){
 
         //TODO: try/catch based on service method exception throws
+
+        //hash the incoming user's password
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         User u = us.registerUser(newUser);
 
