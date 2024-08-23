@@ -49,7 +49,6 @@ public class WebSecurityConfig {
             } else {
                 return userDAO.findByUsername(username);
             }
-            //.orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found."))
         });
     }
 
@@ -78,8 +77,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http.csrf(c -> c.disable())
-                .authorizeHttpRequests(auth -> {}
-                        //TODO: set who can access what endpoints
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/auth/**").permitAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
