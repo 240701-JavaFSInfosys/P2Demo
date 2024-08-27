@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import "./Login.css" 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
 import { store } from "../../globalData/store"
+import { UserContext } from "../../globalData/UserContext"
 
 
 export const Login: React.FC = () => {
@@ -12,6 +13,10 @@ export const Login: React.FC = () => {
         username:"",
         password:""
     })
+
+    //*NEW!! Context API! this is a different state object for global user data with useContext
+    const {globalUserData, setGlobalUserData} = useContext(UserContext)
+
 
     //we need a useNavigate hook to allow us to navigate between components... no more manual URL changes!
     const navigate = useNavigate()
@@ -46,10 +51,17 @@ export const Login: React.FC = () => {
                 //print the data
                 console.log(response.data)
 
-                //Save the incoming user data in our global state (store.ts in the globalData folder)
-                store.loggedInUser = response.data
+                //!OLD:
+                // Save the incoming user data in our global state (store.ts in the globalData folder)
+                // store.loggedInUser = response.data
 
-                alert("Welcome, " + store.loggedInUser.username)
+                //*NEW: storing user with Context API
+                setGlobalUserData(response.data)
+
+                //for visibility, we'll console.log the global data
+                console.log(response.data)
+
+                alert("Welcome, " + response.data.username)
 
                 //depending on the user's role value, send them to one of two components
                 if(response.data.role === "user"){

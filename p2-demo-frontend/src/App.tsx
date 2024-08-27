@@ -9,19 +9,24 @@ import { CarContainer } from './components/Car/CarContainer';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importing Bootstrap CSS globally
 import { AddCar } from './components/Car/AddCar';
 import { UsersContainer } from './components/User/UsersContainer';
+import { UserProvider } from './globalData/UserProvider';
 
+
+//we're wrapping everything with our userProvider to make user data global 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-          <Routes>
-              <Route path="" element={<Login/>}/>
-              <Route path="/register" element={<Register/>}/>
-              <Route path="/cars" element={<CarContainer/>}/>
-              <Route path="/addcar" element={<AddCar/>}/>
-              <Route path="/users" element={<UsersContainer/>}/>
-          </Routes>
-      </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/cars" element={<CarContainer/>}/>
+                <Route path="/addcar" element={<AddCar/>}/>
+                <Route path="/users" element={<UsersContainer/>}/>
+            </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

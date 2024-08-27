@@ -1,20 +1,30 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserInterface } from "../../interfaces/UserInterface"
 import { User } from "./User"
 import { store } from "../../globalData/store"
+import { UserContext } from "../../globalData/UserContext"
 
 export const UsersContainer: React.FC<any> = ({users:any}) => {
 
     //useState hook, which will store an Array of Users (to send to the User Component)
     const [users, setUsers] = useState<UserInterface[]>([])
 
+    //*NEW! Context API state for global user data
+    const {globalUserData, setGlobalUserData} = useContext(UserContext)
+
     //need this to navigate between URLS
     const navigate = useNavigate()
 
     //useEffect to GET the List of User upon component render
     useEffect(()=>{
+
+        //simple route guard - if the user is not an admin send them back to login
+        if(globalUserData.role !== "admin"){
+            navigate("/")
+        }
+
         getAllUsers()
     }, [])
 
@@ -23,7 +33,7 @@ export const UsersContainer: React.FC<any> = ({users:any}) => {
 
         const response = await axios.get("http://44.201.178.118:8080/users", {
             headers: {
-                'Authorization': `Bearer ${store.loggedInUser.jwt}`
+                'Authorization': `Bearer ${globalUserData.jwt}`
             }
         })
         .then(
