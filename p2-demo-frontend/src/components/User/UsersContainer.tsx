@@ -21,7 +21,7 @@ export const UsersContainer: React.FC<any> = ({users:any}) => {
     //function to get all users from the DB
     const getAllUsers = async () => {
 
-        const response = await axios.get("http://44.208.20.19:8080/users", {
+        const response = await axios.get("http://44.201.178.118:8080/users", {
             headers: {
                 'Authorization': `Bearer ${store.loggedInUser.jwt}`
             }
